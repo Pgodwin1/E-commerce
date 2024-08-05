@@ -12,7 +12,7 @@ const productSchema = new mongoose.Schema<IProductDoc>(
         type: String,
       },
       price: {
-        type: String,
+        type: Number,
         required: true
       },
       imageUrl: {
