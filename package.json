@@ -10,7 +10,9 @@
   "scripts": {
     "compile": "tsc --build",
     "compile:watch": "tsc --build --watch",
-    "dev": "concurrently --kill-others \"yarn compile:watch\""
+    "start": "node dist/App.js",
+    "start:dev": "nodemon --exec ts-node src/App.ts",
+    "dev": "concurrently --kill-others \"yarn compile:watch\" \"yarn start:dev\""
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -25,7 +27,9 @@
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
     "@types/node": "^22.1.0",
+    "concurrently": "^8.2.2",
     "nodemon": "^3.1.4",
+    "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
   }
 }
