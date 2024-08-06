@@ -1,15 +1,6 @@
 import Joi from "joi"
 import { NewCreatedproduct } from "../../interfaces/product.interface";
 
-export const option = {
-  abortEarly: false,
-  errors: {
-    wrap: {
-      label: "",
-    },
-  },
-};
-
 const createProductBody: Record<keyof NewCreatedproduct, any> = {
   name: Joi.string().min(4).max(20).required().messages({
     "any.required": "Art Name is required",

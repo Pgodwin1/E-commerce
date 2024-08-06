@@ -35,6 +35,26 @@ userSchema.static('isEmailTaken', async function (email: string): Promise<boolea
     return !!user
 })
 
+/**
+ * Hash the user's password before saving
+ */
+userSchema.methods.isPasswordMatch = async function (
+  password: string
+): Promise<boolean> {
+  const user = this as IUserDoc;
+  return bcrypt.compare(password, user.password);
+};
+
+userSchema.pre('save', async function (next) {
+  const user = this as IUserDoc;
+
+  if (user.isModified('password')) {
+    user.password = await bcrypt.hash(user.password, 8);
+  }
+
+  next();
+});
+
 const User = mongoose.model<IUserDoc, IUserModel>('user', userSchema)
 
 export default User;
